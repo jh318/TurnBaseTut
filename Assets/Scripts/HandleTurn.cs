@@ -6,6 +6,9 @@ using UnityEngine;
 public class HandleTurn {
 
 	public string Attacker;
+	public string Type;
 	public GameObject AttackersGameObject;
 	public GameObject AttackersTarget;
+
+	
 }
