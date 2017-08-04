@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class BattleStateMachine : MonoBehaviour {
 
+	private BattleStateMachine BSM;
 	public enum PerformAction{
 		WAIT,
 		TAKEACTION,
@@ -15,13 +16,14 @@ public class BattleStateMachine : MonoBehaviour {
 
 	public List<HandleTurn> PerformList = new List<HandleTurn>();
 
-	public List<GameObject> HerosInGame = new List<GameObject>();
+	public List<GameObject> HerosInBattle = new List<GameObject>();
 	public List<GameObject> EnemysInBattle = new List<GameObject>();
 
 
 	void Start () {
 		battleStates = PerformAction.WAIT;
 		EnemysInBattle.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+		HerosInBattle.AddRange(GameObject.FindGameObjectsWithTag("Hero"));
 	}
 	
 	void Update () {
@@ -33,5 +35,9 @@ public class BattleStateMachine : MonoBehaviour {
 			case(PerformAction.PERFORMACTION):
 				break;
 		}
+	}
+
+	public void CollectActions(HandleTurn input){
+		PerformList.Add(input);
 	}
 }
