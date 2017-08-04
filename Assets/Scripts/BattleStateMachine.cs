@@ -29,6 +29,9 @@ public class BattleStateMachine : MonoBehaviour {
 	void Update () {
 		switch(battleStates){
 			case(PerformAction.WAIT):
+				if(PerformList.Count > 0){
+					battleStates = PerformAction.TAKEACTION;
+				}
 				break;
 			case(PerformAction.TAKEACTION):
 				break;

@@ -6,6 +6,7 @@ public class EnemyStateMachine : MonoBehaviour {
 
 	private BattleStateMachine BSM;
 	public BaseEnemy enemy;
+	bool actionStarted;
 
 	public enum TurnState{
 		PROCESSING,
@@ -26,6 +27,9 @@ public class EnemyStateMachine : MonoBehaviour {
 		currentState = TurnState.PROCESSING;
 		BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
 		startposition = transform.position;
+		//IEnumerator Stuff timeforaction stuff
+		actionStarted = false;
+
 	}
 
 	void Update(){
@@ -41,6 +45,7 @@ public class EnemyStateMachine : MonoBehaviour {
 				//idle state
 				break;
 			case(TurnState.ACTION):
+				StartCoroutine(TimeForAction());
 				break;
 			case(TurnState.DEAD):
 				break;
@@ -62,4 +67,29 @@ public class EnemyStateMachine : MonoBehaviour {
 		myAttack.AttackersTarget = BSM.HerosInBattle[Random.Range(0,BSM.HerosInBattle.Count)];
 		BSM.CollectActions(myAttack);
 	}
+
+	private IEnumerator TimeForAction(){
+		if(actionStarted){
+			yield break;
+		}
+		actionStarted = true;
+
+		//animate the enemy near the hero to attack
+
+		//wait a bit
+		//do damage
+
+		//animate back to start position
+
+		//remove this performer from list in BSM
+		
+		//reset BSM -> Wait
+
+		actionStarted = false;
+		//reset this enemy
+		cur_cooldown = 0.0f;
+		currentState = TurnState.PROCESSING;
+	
+	}
+
 }
