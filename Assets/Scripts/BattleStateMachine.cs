@@ -35,11 +35,18 @@ public class BattleStateMachine : MonoBehaviour {
 	public GameObject enemyButton;
 	public Transform Spacer;
 
+	public GameObject AttackPanel;
+	public GameObject EnemySelectPanel;
+
 
 	void Start () {
 		battleStates = PerformAction.WAIT;
 		EnemysInBattle.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
 		HerosInBattle.AddRange(GameObject.FindGameObjectsWithTag("Hero"));
+		HeroInput = HeroGUI.ACTIVATE;
+
+		AttackPanel.SetActive(false);
+		EnemySelectPanel.SetActive(false);
 
 		EnemyButtons();
 	}
@@ -67,6 +74,24 @@ public class BattleStateMachine : MonoBehaviour {
 
 				break;
 		}
+
+		switch(HeroInput){
+			case(HeroGUI.ACTIVATE):
+				if(HerosToManage.Count > 0){
+					
+				}
+			break;
+
+			case(HeroGUI.WAITING):
+					
+			break;
+			case(HeroGUI.DONE):
+				
+			break;
+			
+			
+		}
+			
 	}
 
 	public void CollectActions(HandleTurn input){
